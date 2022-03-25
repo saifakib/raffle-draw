@@ -1,0 +1,25 @@
+{
+  "name": "raffle-draw",
+  "version": "1.0.0",
+  "description": "Banckend Raffle draw application without using db, for storing using file system",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/server.js"
+  },
+  "keywords": [
+    "Raffle",
+    "Draw",
+    "Ticket",
+    "Lottery"
+  ],
+  "author": "Saif Uddin",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "http-errors": "^2.0.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15",
+    "shortid": "^2.2.16"
+  }
+}
