@@ -144,6 +144,33 @@ class TicketCollection {
         )
         return deleteTickets
     }
+
+
+    /**
+     * find winners
+     * @param {Number} winderCount 
+     * @return {Ticket[]}
+     */
+    drwa(winderCount) {
+        const winnerIndexs = new Array(winderCount);
+
+        let index = 0;
+        while(index < winnerIndexs) {
+            const ticketIndex = Math.floor(Math.random * this[tickets].length);
+            if(!winnerIndexs.includes(ticketIndex)) {
+                winnerIndexs[index++] = ticketIndex;
+                continue;
+            }
+        }
+        const winners = winnerIndexs.map(
+            /**
+             * @param {Number} index
+             */
+            (index) => this[tickets][index]
+        )
+        
+        return winners
+    }
 }
 
 const collection = new TicketCollection;
