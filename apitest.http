@@ -1,0 +1,61 @@
+
+
+GET http://localhost:8000/api/v1/tickets
+
+###
+
+POST http://localhost:8000/api/v1/tickets
+Content-Type: application/json
+
+{
+    "username": "akibsaif",
+    "price": 200
+}
+
+
+###
+GET http://localhost:8000/api/v1/tickets/t/ThsWFL_Hu
+
+###
+PUT http://localhost:8000/api/v1/tickets/t/ThsWFL_Hu
+Content-Type: application/json
+
+{
+    "username": "akib",
+    "price": 200
+}
+
+
+###
+DELETE http://localhost:8000/api/v1/tickets/t/PtIgnoquG
+
+
+###
+GET http://localhost:8000/api/v1/tickets/u/saifakib
+
+###
+PUT http://localhost:8000/api/v1/tickets/u/Akib
+Content-Type: application/json
+
+{
+    "username": "Saif",
+    "price": 200
+}
+
+###
+DELETE http://localhost:8000/api/v1/tickets/u/saifakib
+
+
+###
+POST http://localhost:8000/api/v1/tickets/bulk
+Content-Type: application/json
+
+{
+    "username": "rrr",
+    "price": 300,
+    "quantity": 3
+}
+
+
+###
+GET http://localhost:8000/api/v1/tickets/draw?wc=1

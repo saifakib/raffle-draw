@@ -9,7 +9,9 @@ const tickets = Symbol("tickets");
 
 class TicketCollection {
   constructor() {
-    this[tickets] = [];
+    (async function () {
+      this[tickets] = await readFile();
+    }.bind(this))();
   }
 
   /**
@@ -21,6 +23,8 @@ class TicketCollection {
   create(username, price) {
     const ticket = new Ticket(username, price);
     this[tickets].push(ticket);
+    console.log(this[tickets].length)
+    writeFile(this[tickets]);
     return ticket;
   }
 
@@ -69,13 +73,13 @@ class TicketCollection {
    * @return {Ticket[]} tickets
    */
   findByUsername(username) {
-    const tickets = this[tickets].filter(
+    const userTickets = this[tickets].filter(
       /**
        * @param {Ticket} ticket
        */
       (ticket) => ticket.username === username
     );
-    return tickets;
+    return userTickets;
   }
 
   /**
@@ -88,6 +92,8 @@ class TicketCollection {
     const ticket = this.findById(id);
     ticket.username = updateBody.username ?? ticket.username;
     ticket.price = updateBody.price ?? ticket.price;
+    ticket.updatedAt = new Date();
+    writeFile(this[tickets]);
     return ticket;
   }
 
@@ -124,6 +130,7 @@ class TicketCollection {
       return false;
     } else {
       this[tickets].splice(index, 1);
+      writeFile(this[tickets]);
       return true;
     }
   }
@@ -146,15 +153,15 @@ class TicketCollection {
 
   /**
    * find winners
-   * @param {Number} winderCount
+   * @param {Number} winnerCount
    * @return {Ticket[]}
    */
-  drwa(winderCount) {
-    const winnerIndexs = new Array(winderCount);
+  drwa(winnerCount) {
+    const winnerIndexs = new Array(winnerCount);
 
     let index = 0;
-    while (index < winnerIndexs) {
-      const ticketIndex = Math.floor(Math.random * this[tickets].length);
+    while (index < winnerCount) {
+      const ticketIndex = Math.floor(Math.random() * this[tickets].length);
       if (!winnerIndexs.includes(ticketIndex)) {
         winnerIndexs[index++] = ticketIndex;
         continue;

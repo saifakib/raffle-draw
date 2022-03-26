@@ -17,6 +17,7 @@ exports.sellBulkTicket = (req, res) => {
   res.status(201).json({
     message: "Bulk Ticket Created Succesfully",
     tickets,
+    total: tickets.length
   });
 };
 
@@ -25,7 +26,6 @@ exports.findAll = (req, res) => {
   const tickets = ticketCollection.find();
   res.status(201).json({ items: tickets, total: tickets.length });
 };
-
 
 // find ticket by id
 exports.findByTicketId = (req, res) => {
@@ -62,20 +62,20 @@ exports.updateTicketByUsername = (req, res) => {
 };
 
 // delete ticket by id
-exports.deleteTicketById = ( req, res ) => {
-    const ticket = ticketCollection.deleteById(req.params.id)
-    res.status(202).json({ticket})
-}
+exports.deleteTicketById = (req, res) => {
+  const ticket = ticketCollection.deleteById(req.params.id);
+  res.status(202).json({ ticket });
+};
 
 // delete bulk ticket by username
-exports.deleteTicketByUsername = ( req, res ) => {
-    const tickets = ticketCollection.deleteBulk(req.params.username)
-    res.status(202).json({ tickets, total: tickets.length })
-}
+exports.deleteTicketByUsername = (req, res) => {
+  const tickets = ticketCollection.deleteBulk(req.params.username);
+  res.status(202).json({ message: "User all ticket deleted" });
+};
 
 // drwa winners
-exports.drawWinners = ( req, res ) => {
-    const wc = req.query.wc ?? 3;
-    const winners = ticketCollection.drwa(wc);
-    res.status(200).json({ winners })
-}
+exports.drawWinners = (req, res) => {
+  const wc = req.query.wc ?? 3;
+  const winners = ticketCollection.drwa(wc);
+  res.status(200).json({ winners });
+};
