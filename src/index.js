@@ -11,12 +11,11 @@ const Routes = require('./routes')
 const app = express();
 
 // build in middleware
-app.use(cors());
-app.use(morgan('dev'))
+app.use([morgan('dev'), cors(), express.json()]);
 
 
 // route setup
-app.use('/', Routes)
+app.use('/api/v1/tickets', Routes)
 
 // error handling
 app.use(notFoundHandler)
